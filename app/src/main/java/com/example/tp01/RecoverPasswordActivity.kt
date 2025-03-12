@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -78,12 +79,14 @@ fun RecoverPasswordPage(){
                     modifier = Modifier.padding(30.dp)
                 ){
                     Spacer(modifier = Modifier.weight(1f))
-                    MyTitle("Password recovery")
+                    MyTitle(text = stringResource(R.string.app_recoverpassword_title))
                     Spacer(modifier = Modifier.weight(1f))
-                    MyWarning("An email with a link to reset your password will be sent to you. It will only be active for 5 minutes.")
+                    MyWarning(text = stringResource(R.string.app_recoverpassword_msg_security))
                     Spacer(modifier = Modifier.weight(0.5f))
-                    MyTextField(label = "Email", placeholderText = "Email", icon = Icons.Outlined.Email)
-                    MyMainButton("Send Mail")
+                    MyTextField(label = stringResource(R.string.app_login_field_label_email),
+                        placeholderText = stringResource(R.string.app_login_field_hint_email),
+                        icon = Icons.Outlined.Email)
+                    MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail))
                     Spacer(modifier = Modifier.weight(4f))
                 }
             }

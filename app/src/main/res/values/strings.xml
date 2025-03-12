@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">TP01</string>
+    <string name="app_name">TP Kotlin</string>
+    <string name="app_login_title">Login</string>
+    <string name="app_login_button_login">Log In</string>
+    <string name="app_login_button_signup">Sign Up</string>
+    <string name="app_login_button_forgotten_password">I have forgotten my password</string>
+    <string name="app_login_field_label_email">Email</string>
+    <string name="app_login_field_hint_email">Email</string>
+    <string name="app_login_field_label_password">Password</string>
+    <string name="app_login_field_hint_password">****</string>
+    <string name="app_login_msg_security">Please be careful when entering your credentials. We will never ask you for your password.</string>
+
+    <string name="app_recoverpassword_title">Password recovery</string>
+    <string name="app_recoverpassword_msg_security">An email with a link to reset your password will be sent to you. It will only be active for 5 minutes.</string>
+    <string name="app_recoverpassword_button_sendmail">Send Mail</string>
+
+    <string name="app_register_title">Sign Up</string>
+    <string name="app_register_msg_security">Something about security when registering</string>
+    <string name="app_register_field_username_label">Username</string>
+    <string name="app_register_field_username_hint">Username</string>
+    <string name="app_register_field_zipcode_label">ZipCode</string>
+    <string name="app_register_field_zipcode_hint">00000</string>
+    <string name="app_register_field_cityname_label">City Name</string>
+    <string name="app_register_field_cityname_hint">City Name</string>
+    <string name="app_register_field_phonekey_label">Key</string>
+    <string name="app_register_field_phonekey_hint">+XX</string>
+    <string name="app_register_field_phonenumber_label">Phone Number</string>
+    <string name="app_register_field_phonenumber_hint">X XX XX XX XX</string>
+    <string name="app_register_button_signup">Sign Up</string>
+
 </resources>

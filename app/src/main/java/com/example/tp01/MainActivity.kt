@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -76,20 +77,21 @@ fun LoginPage(){
                     modifier = Modifier.padding(30.dp)
                 ){
                     Spacer(modifier = Modifier.weight(1f))
-                    MyTitle(text = "Login")
+                    MyTitle(text = stringResource(R.string.app_login_title))
                     Spacer(modifier = Modifier.weight(1f))
-                    MyWarning(text = "Please be careful when entering your credentials. " +
-                            "We will never ask you for your password.")
-                    MyTextField(label = "Email", placeholderText = "Email",
+                    MyWarning(text = stringResource(R.string.app_login_msg_security))
+                    MyTextField(label = stringResource(R.string.app_login_field_label_email),
+                        placeholderText = stringResource(R.string.app_login_field_hint_email),
                         icon = Icons.Outlined.Email
                     )
-                    MyTextField(label = "Password", placeholderText = "****",
+                    MyTextField(label = stringResource(R.string.app_login_field_label_password),
+                        placeholderText = stringResource(R.string.app_login_field_hint_password),
                         icon = Icons.Outlined.Lock)
-                    MySmallButton(text = "I have forgotten my password")
+                    MySmallButton(text = stringResource(R.string.app_login_button_forgotten_password))
                     Spacer(modifier = Modifier.weight(0.5f))
-                    MyMainButton(text = "Login")
+                    MyMainButton(text = stringResource(R.string.app_login_button_login))
                     Spacer(modifier = Modifier.weight(1.5f))
-                    MyMainButton(text = "Sign up")
+                    MyMainButton(text = stringResource(R.string.app_login_button_signup))
                     Spacer(modifier = Modifier.weight(1f))
                 }
             }

@@ -152,22 +152,18 @@ fun MyMultiField(labels: Array<String>, placeholders: Array<String>,
                 modifier = Modifier.weight(weights[i])
             ){
                 Column {
-                    if (icons != null) {
-                            MyTextField(
-                                label = labels[i],
-                                placeholderText = placeholders[i],
-                                icon = icons[i]
-                            )
-                        }
-                    else{
-                        MyTextField(
+                    if (icons != null) {MyTextField(
+                            label = labels[i],
+                            placeholderText = placeholders[i],
+                            icon = icons[i]
+                        )}
+                    else{MyTextField(
                             label = labels[i],
                             placeholderText = placeholders[i]
-                        )
-                    }
+                        )}
                 }
             }
-        }
+        } // end for elements
     }
 }
 

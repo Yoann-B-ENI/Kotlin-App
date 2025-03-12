@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -78,27 +79,38 @@ fun RegisterPage(){
                     modifier = Modifier.padding(30.dp)
                 ){
                     Spacer(modifier = Modifier.weight(1f))
-                    MyTitle("Sign Up")
+                    MyTitle(text = stringResource(R.string.app_register_title))
                     Spacer(modifier = Modifier.weight(1f))
-                    MyWarning("Something about security when registering")
+                    MyWarning(text = stringResource(R.string.app_register_msg_security))
                     Spacer(modifier = Modifier.weight(0.5f))
-                    MyTextField("Username", placeholderText = "Username")
-                    MyTextField("Email", placeholderText = "Email", icon = Icons.Outlined.Email)
-                    MyTextField("Password", placeholderText = "****", icon = Icons.Outlined.Lock)
-                    MyTextField("Password confirmation", placeholderText = "****", icon = Icons.Outlined.Lock)
+                    MyTextField(label = stringResource(R.string.app_register_field_username_label),
+                        placeholderText = stringResource(R.string.app_register_field_username_hint))
+                    MyTextField(label = stringResource(R.string.app_login_field_label_email),
+                        placeholderText = stringResource(R.string.app_login_field_hint_email),
+                        icon = Icons.Outlined.Email)
+                    MyTextField(label = stringResource(R.string.app_login_field_label_password),
+                        placeholderText = stringResource(R.string.app_login_field_hint_password),
+                        icon = Icons.Outlined.Lock)
+                    MyTextField(label = stringResource(R.string.app_login_field_label_password),
+                        placeholderText = stringResource(R.string.app_login_field_hint_password),
+                        icon = Icons.Outlined.Lock)
 
-                    MyMultiField(labels = arrayOf("ZipCode", "City Name"),
-                        placeholders = arrayOf("00000", "City Name"),
+                    MyMultiField(labels = arrayOf(stringResource(R.string.app_register_field_zipcode_label),
+                        stringResource(R.string.app_register_field_cityname_label)),
+                        placeholders = arrayOf(stringResource(R.string.app_register_field_zipcode_hint),
+                            stringResource(R.string.app_register_field_cityname_hint)),
                         weights = arrayOf(1f, 3f)
                     )
-                    MyMultiField(labels = arrayOf("Key", "Phone Number"),
-                        placeholders = arrayOf("+XX", "X XX XX XX XX"),
+                    MyMultiField(labels = arrayOf(stringResource(R.string.app_register_field_phonekey_label),
+                        stringResource(R.string.app_register_field_phonenumber_label)),
+                        placeholders = arrayOf(stringResource(R.string.app_register_field_phonekey_hint),
+                            stringResource(R.string.app_register_field_phonenumber_hint)),
                         weights = arrayOf(1f, 3f),
                         icons = arrayOf(null, Icons.Outlined.Phone)
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
-                    MyMainButton("Sign up")
+                    MyMainButton(text = stringResource(R.string.app_register_button_signup))
                     Spacer(modifier = Modifier.weight(1f))
                 }
             }
