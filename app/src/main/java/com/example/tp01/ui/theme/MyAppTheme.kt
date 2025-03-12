@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -50,7 +52,8 @@ fun MyMainButton(text: String) {
     ) {
         Text(text = text,
             fontSize = 25.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color.White
         )
     }
 }
@@ -70,7 +73,8 @@ fun MySmallButton(text: String){
                 disabledContentColor = Color(0.8f, 0.8f, 0.8f, 0.5f)
             )
         ) {
-            Text(text = text, fontStyle = FontStyle.Italic)
+            Text(text = text, fontStyle = FontStyle.Italic,
+                color = Color.White)
         }
     }
 }
@@ -176,4 +180,24 @@ fun MyImageBackground(@DrawableRes id: Int){
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop
     )
+}
+
+
+@Composable
+fun MyPageTemplate(@DrawableRes bg_id: Int, content: @Composable() (ColumnScope.() -> Unit)
+){
+    TP01Theme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Box(
+                modifier = Modifier.padding(innerPadding)
+            ){
+                MyImageBackground(bg_id)
+                Column (
+                    modifier = Modifier.padding(30.dp)
+                ){
+                    content()
+                }
+            }
+        }
+    }
 }
