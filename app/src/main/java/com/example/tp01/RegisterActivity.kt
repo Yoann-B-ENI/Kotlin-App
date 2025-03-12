@@ -49,9 +49,9 @@ fun RegisterPage(){
         MyTextField(label = stringResource(R.string.app_login_field_label_password),
             placeholderText = stringResource(R.string.app_login_field_hint_password),
             icon = Icons.Outlined.Lock)
-        MyTextField(label = stringResource(R.string.app_login_field_label_password),
-            placeholderText = stringResource(R.string.app_login_field_hint_password),
-            icon = Icons.Outlined.Lock)
+//        MyTextField(label = stringResource(R.string.app_login_field_label_password),
+//            placeholderText = stringResource(R.string.app_login_field_hint_password),
+//            icon = Icons.Outlined.Lock)
 
         MyMultiField(labels = arrayOf(stringResource(R.string.app_register_field_zipcode_label),
             stringResource(R.string.app_register_field_cityname_label)),

@@ -85,9 +85,10 @@ fun MyTextField(label: String, placeholderText: String,
     Text(text = label,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
+        color = Color.Black,
         style = TextStyle(
             shadow = Shadow(
-                color = Color(1f, 1f, 1f, 1f),
+                color = Color.White,
                 offset = Offset(5f, 5f),
                 blurRadius = 1f),
             fontSize = 22.sp,
@@ -124,7 +125,8 @@ fun MyWarning(text: String) {
         .border(BorderStroke(width = 1.dp, Color(1f,1f,1f,1f)))
     ){
         Text(text = text, fontStyle = FontStyle.Italic,
-            modifier = Modifier.padding(5.dp))
+            modifier = Modifier.padding(5.dp),
+            color = Color.Black)
     }
 }
 
@@ -133,9 +135,10 @@ fun MyTitle(text: String) {
     Text(text = text,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
+        color = Color.Black,
         style = TextStyle(
             shadow = Shadow(
-                color = Color(1f, 1f, 1f, 1f),
+                color = Color.White,
                 offset = Offset(5f, 5f),
                 blurRadius = 1f),
             fontSize = 35.sp,

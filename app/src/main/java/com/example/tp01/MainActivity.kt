@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            //ArticlePage()
             LoginPage()
         }
     }
@@ -38,6 +39,7 @@ fun LoginPage(){
         MyTitle(text = stringResource(R.string.app_login_title))
         Spacer(modifier = Modifier.weight(1f))
         MyWarning(text = stringResource(R.string.app_login_msg_security))
+        Spacer(modifier = Modifier.weight(0.5f))
         MyTextField(label = stringResource(R.string.app_login_field_label_email),
             placeholderText = stringResource(R.string.app_login_field_hint_email),
             icon = Icons.Outlined.Email
