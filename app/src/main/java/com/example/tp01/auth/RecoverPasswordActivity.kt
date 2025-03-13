@@ -1,5 +1,6 @@
 package com.example.tp01.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tp01.R
@@ -31,6 +33,7 @@ class RecoverPasswordActivity : ComponentActivity() {
 
 @Composable
 fun RecoverPasswordPage(){
+    val context = LocalContext.current
     MyPageTemplate(
         R.drawable.blake_wisz_unsplash_river_sea_gorge
     ) {
@@ -42,7 +45,10 @@ fun RecoverPasswordPage(){
         MyTextField(label = stringResource(R.string.app_login_field_label_email),
             placeholderText = stringResource(R.string.app_login_field_hint_email),
             icon = Icons.Outlined.Email)
-        MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail))
+
+        val intent = Intent(context, MainActivity::class.java)
+        MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail),
+            context = context, intent = intent)
         Spacer(modifier = Modifier.weight(4f))
     }
 }
