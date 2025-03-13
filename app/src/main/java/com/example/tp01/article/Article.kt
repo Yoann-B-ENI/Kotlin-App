@@ -1,4 +1,4 @@
-package com.example.tp01
+package com.example.tp01.article
 
 data class Article(
     var title: String,

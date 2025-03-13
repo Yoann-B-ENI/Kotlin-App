@@ -1,4 +1,4 @@
-package com.example.tp01
+package com.example.tp01.auth
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.tp01.article.ArticlePage
+import com.example.tp01.R
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyPageTemplate
 import com.example.tp01.ui.theme.MySmallButton
@@ -24,8 +26,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            //ArticlePage()
-            LoginPage()
+            ArticlePage()
+            //LoginPage()
         }
     }
 }
@@ -33,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LoginPage(){
-    MyPageTemplate(R.drawable.kimon_maritz_unsplash_river_valley
+    MyPageTemplate(
+        R.drawable.kimon_maritz_unsplash_river_valley
     ) {
         Spacer(modifier = Modifier.weight(1f))
         MyTitle(text = stringResource(R.string.app_login_title))
