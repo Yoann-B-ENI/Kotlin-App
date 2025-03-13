@@ -22,10 +22,27 @@
             android:theme="@style/Theme.TP01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".demo_intent.DemoPage1"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".auth.RegisterActivity"
+            >
+        </activity>
+        <activity
+            android:name=".auth.RecoverPasswordActivity"
+            >
+        </activity>
+        <activity
+            android:name=".article.ArticleActivity"
+            >
+        </activity>
+
+
     </application>
 
 </manifest>

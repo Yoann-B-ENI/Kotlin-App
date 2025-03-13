@@ -1,5 +1,7 @@
 package com.example.tp01.ui.theme
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
@@ -39,8 +41,12 @@ import androidx.compose.ui.unit.sp
 import com.example.tp01.R
 
 @Composable
-fun MyMainButton(text: String) {
-    Button(onClick = {},
+fun MyMainButton(text: String, context: Context? = null, intent: Intent? = null) {
+    Button(onClick = {
+        if (context != null && intent != null){
+            context.startActivity(intent)
+        }
+    },
         modifier = Modifier.fillMaxWidth(),
         border = BorderStroke(3.dp, Color(1f, 1f, 1f, 1f)),
         colors = ButtonColors(
@@ -59,10 +65,14 @@ fun MyMainButton(text: String) {
 }
 
 @Composable
-fun MySmallButton(text: String){
+fun MySmallButton(text: String, context: Context? = null, intent: Intent? = null){
     // needs a box for a box scope alignment
     Box(modifier = Modifier.fillMaxWidth()){
-        Button(onClick = {},
+        Button(onClick = {
+            if (context != null && intent != null){
+                context.startActivity(intent)
+            }
+        },
             modifier = Modifier.fillMaxWidth(fraction = 0.75f)
                 .align(Alignment.Center),
             border = BorderStroke(3.dp, Color(1f, 1f, 1f, 0.5f)),

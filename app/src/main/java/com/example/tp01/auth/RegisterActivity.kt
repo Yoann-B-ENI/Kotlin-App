@@ -1,5 +1,6 @@
 package com.example.tp01.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,9 +12,11 @@ import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tp01.R
+import com.example.tp01.article.ArticleActivity
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyMultiField
 import com.example.tp01.ui.theme.MyPageTemplate
@@ -34,6 +37,7 @@ class RegisterActivity : ComponentActivity() {
 
 @Composable
 fun RegisterPage(){
+    val context = LocalContext.current
     MyPageTemplate(
         R.drawable.ivana_cajina_unsplash_hills
     ) {
@@ -70,7 +74,9 @@ fun RegisterPage(){
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        MyMainButton(text = stringResource(R.string.app_register_button_signup))
+        val intentArticle = Intent(context, ArticleActivity::class.java)
+        MyMainButton(text = stringResource(R.string.app_register_button_signup),
+            context = context, intent = intentArticle)
         Spacer(modifier = Modifier.weight(1f))
     }
 }

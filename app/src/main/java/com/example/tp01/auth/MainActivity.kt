@@ -1,5 +1,6 @@
 package com.example.tp01.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,10 +11,12 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tp01.article.ArticlePage
 import com.example.tp01.R
+import com.example.tp01.article.ArticleActivity
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyPageTemplate
 import com.example.tp01.ui.theme.MySmallButton
@@ -26,8 +29,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ArticlePage()
-            //LoginPage()
+            //ArticlePage()
+            LoginPage()
         }
     }
 }
@@ -35,6 +38,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LoginPage(){
+    val context = LocalContext.current
     MyPageTemplate(
         R.drawable.kimon_maritz_unsplash_river_valley
     ) {
@@ -50,11 +54,19 @@ fun LoginPage(){
         MyTextField(label = stringResource(R.string.app_login_field_label_password),
             placeholderText = stringResource(R.string.app_login_field_hint_password),
             icon = Icons.Outlined.Lock)
-        MySmallButton(text = stringResource(R.string.app_login_button_forgotten_password))
+        val intentRecoverPwd = Intent(context, RecoverPasswordActivity::class.java)
+        MySmallButton(text = stringResource(R.string.app_login_button_forgotten_password), 
+            context = context, intent = intentRecoverPwd)
         Spacer(modifier = Modifier.weight(0.5f))
-        MyMainButton(text = stringResource(R.string.app_login_button_login))
+
+        val intentArticle = Intent(context, ArticleActivity::class.java)
+        MyMainButton(text = stringResource(R.string.app_login_button_login),
+            context = context, intent = intentArticle)
         Spacer(modifier = Modifier.weight(1.5f))
-        MyMainButton(text = stringResource(R.string.app_login_button_signup))
+
+        val intentSignup = Intent(context, RegisterActivity::class.java)
+        MyMainButton(text = stringResource(R.string.app_login_button_signup),
+            context = context, intent  = intentSignup)
         Spacer(modifier = Modifier.weight(1f))
     }
 }
