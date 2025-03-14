@@ -79,6 +79,7 @@ fun ArticlePage(articleViewModel: ArticleViewModel = viewModel()
 
 @Composable
 fun FunShowArticles(articleArray: Array<Article>){
+    //TODO make this a lazy column
     for (elem in articleArray){
         Box(modifier = Modifier.fillMaxWidth()
         ){

@@ -68,19 +68,3 @@ fun DemoPage1Preview() {
     DemoPage1Page()
 }
 
-
-/*
-* spacer
-* Login Title
-* spacer
-* Security warning message
-* Email field
-* Password field
-* Forgotten pwd
-* spacer
-* login button
-* spacer
-* no account -> register?
-* spacer
-*
-* */
