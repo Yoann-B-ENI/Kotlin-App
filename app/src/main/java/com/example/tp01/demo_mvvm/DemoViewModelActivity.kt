@@ -48,7 +48,7 @@ fun DemoViewModelActivityPage(viewModel: DemoViewModel){
         R.drawable.kimon_maritz_unsplash_river_valley
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        MyTitle(text = "Demo Stateful 2 (class)")
+        MyTitle(text = "Demo Stateful MVVM")
         Spacer(modifier = Modifier.weight(1f))
 
         LazyColumn {
