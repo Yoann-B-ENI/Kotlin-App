@@ -11,14 +11,13 @@ data class Article(
 ) {}
 
 class ArticleViewModel : ViewModel(){
-    private val _arrayArticles = MutableStateFlow<Array<Article>>(emptyArray())
-    val arrayArticles: StateFlow<Array<Article>> = _arrayArticles
+    val arrayArticles = MutableStateFlow<Array<Article>>(emptyArray())
 
     fun addArticle(art: Article){
-        _arrayArticles.value += art
+        arrayArticles.value += art
     }
 
     fun removeArticle(){
-        _arrayArticles.value  = _arrayArticles.value.dropLast(1).toTypedArray()
+        arrayArticles.value  = arrayArticles.value.dropLast(1).toTypedArray()
     }
 }

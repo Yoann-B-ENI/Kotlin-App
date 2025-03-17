@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,14 +45,13 @@ class ArticleActivity : ComponentActivity() {
 
 
 @Composable
-fun ArticlePage(articleViewModel: ArticleViewModel = viewModel()
+fun ArticlePage(articleViewModel: ArticleViewModel = ArticleViewModel()
 ){
+    val articleArray by articleViewModel.arrayArticles.collectAsState()
+
     MyPageTemplate(
         R.drawable.toan_chu_unsplash_calm_lake
     ) {
-
-        val articleArray by articleViewModel.arrayArticles.collectAsState()
-
         Spacer(modifier = Modifier.weight(1f))
         MyTitle(text = "Article list")
         Spacer(modifier = Modifier.weight(1f))
@@ -79,29 +80,30 @@ fun ArticlePage(articleViewModel: ArticleViewModel = viewModel()
 
 @Composable
 fun FunShowArticles(articleArray: Array<Article>){
-    //TODO make this a lazy column
-    for (elem in articleArray){
-        Box(modifier = Modifier.fillMaxWidth()
-        ){
-            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp)
-            ) {
-                Text(text = elem.title,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(
-                        shadow = Shadow(
-                            color = Color(1f, 1f, 1f, 1f),
-                            offset = Offset(5f, 5f),
-                            blurRadius = 1f),
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
+    LazyColumn {
+        items(articleArray){ art ->
+            Box(modifier = Modifier.fillMaxWidth()
+            ){
+                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp)
+                ) {
+                    Text(text = art.title,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            shadow = Shadow(
+                                color = Color(1f, 1f, 1f, 1f),
+                                offset = Offset(5f, 5f),
+                                blurRadius = 1f),
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
-                )
-                Text(text = elem.desc)
-                AsyncImage(
-                    model = elem.imgPath,
-                    contentDescription = elem.title
-                )
+                    Text(text = art.desc)
+                    AsyncImage(
+                        model = art.imgPath,
+                        contentDescription = art.title
+                    )
+                }
             }
         }
     }
