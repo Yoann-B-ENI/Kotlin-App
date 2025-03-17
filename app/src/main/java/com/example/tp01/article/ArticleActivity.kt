@@ -1,6 +1,8 @@
 package com.example.tp01.article
 
 import android.os.Bundle
+import android.widget.ScrollView
+import android.widget.Scroller
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,11 +10,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,6 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -53,11 +62,8 @@ fun ArticlePage(articleViewModel: ArticleViewModel = ArticleViewModel()
         R.drawable.toan_chu_unsplash_calm_lake
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        MyTitle(text = "Article list")
-        Spacer(modifier = Modifier.weight(1f))
-        FunShowArticles(articleArray)
-        Spacer(modifier = Modifier.weight(1f))
-
+        MyTitle(text = stringResource(R.string.app_articlelist_title))
+        Spacer(modifier = Modifier.weight(0.5f))
         Row {
             Button(onClick = {
                 articleViewModel.addArticle(
@@ -66,48 +72,66 @@ fun ArticlePage(articleViewModel: ArticleViewModel = ArticleViewModel()
                         "https://picsum.photos/id/237/200/300")
                 )
             }) {
-                Text("Add Article")
+                Text(stringResource(R.string.app_articlelist_button_addarticle))
             }
             Button(onClick = {
                 articleViewModel.removeArticle()
             }) {
-                Text("Remove Article")
+                Text(stringResource(R.string.app_articlelist_button_removearticle))
             }
         }
+        Spacer(modifier = Modifier.weight(0.5f))
+        FunShowArticles(articleArray = articleArray)
         Spacer(modifier = Modifier.weight(1f))
     }
 }
 
+
+
 @Composable
-fun FunShowArticles(articleArray: Array<Article>){
-    LazyColumn {
+fun FunShowArticles(articleArray : Array<Article>){
+    LazyColumn(
+    ) {
         items(articleArray){ art ->
-            Box(modifier = Modifier.fillMaxWidth()
-            ){
-                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp)
-                ) {
-                    Text(text = art.title,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        style = TextStyle(
-                            shadow = Shadow(
-                                color = Color(1f, 1f, 1f, 1f),
-                                offset = Offset(5f, 5f),
-                                blurRadius = 1f),
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+            ArticleCard(art)
+        }
+    }
+}
+
+@Composable
+fun ArticleCard(art: Article){
+    ElevatedCard(
+        modifier = Modifier.padding(vertical = 5.dp)
+    ) {
+        Row {
+            AsyncImage(
+                model = art.imgPath,
+                placeholder = painterResource(R.drawable.perry_kibler_unsplash_fog_bridge),
+                contentDescription = art.title,
+                modifier = Modifier.width(96.dp).height(96.dp),
+                contentScale = ContentScale.Crop
+            )
+            Column(modifier = Modifier.fillMaxWidth().padding(2.dp)
+            ) {
+                Text(text = art.title,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                    style = TextStyle(
+                        shadow = Shadow(
+                            color = Color(1f, 1f, 1f, 1f),
+                            offset = Offset(5f, 5f),
+                            blurRadius = 1f),
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold
                     )
-                    Text(text = art.desc)
-                    AsyncImage(
-                        model = art.imgPath,
-                        contentDescription = art.title
-                    )
-                }
+                )
+                Text(text = art.desc, color = Color.Black)
             }
         }
     }
 }
+
 
 
 

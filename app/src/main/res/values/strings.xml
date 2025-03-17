@@ -28,4 +28,8 @@
     <string name="app_register_field_phonenumber_hint">X XX XX XX XX</string>
     <string name="app_register_button_signup">Sign Up</string>
 
+    <string name="app_articlelist_title">Article List</string>
+    <string name="app_articlelist_button_addarticle">Add Article</string>
+    <string name="app_articlelist_button_removearticle">Remove Article</string>
+
 </resources>
