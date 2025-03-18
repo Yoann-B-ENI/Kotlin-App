@@ -10,14 +10,3 @@ data class Article(
     var imgPath: String
 ) {}
 
-class ArticleViewModel : ViewModel(){
-    val arrayArticles = MutableStateFlow<Array<Article>>(emptyArray())
-
-    fun addArticle(art: Article){
-        arrayArticles.value += art
-    }
-
-    fun removeArticle(){
-        arrayArticles.value  = arrayArticles.value.dropLast(1).toTypedArray()
-    }
-}

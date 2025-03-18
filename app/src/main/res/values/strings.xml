@@ -31,5 +31,6 @@
     <string name="app_articlelist_title">Article List</string>
     <string name="app_articlelist_button_addarticle">Add Article</string>
     <string name="app_articlelist_button_removearticle">Remove Article</string>
+    <string name="app_articlelist_button_loadarticles">Load Articles</string>
 
 </resources>

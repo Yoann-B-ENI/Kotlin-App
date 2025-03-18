@@ -1,6 +1,6 @@
 package com.example.tp01.demo_api
 
-import com.example.tp01.demo_api.RetrofitTools.Companion.retrofit
+import com.example.tp01.demo_api.RetrofitToolsDemo.Companion.retrofit
 import retrofit2.http.GET
 
 interface PersonService {

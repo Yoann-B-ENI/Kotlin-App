@@ -1,4 +1,4 @@
-package com.example.tp01.demo_api
+package com.example.tp01.api
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -10,8 +10,7 @@ class RetrofitTools {
     // Kotlin :  companion object = tout ce qui est dedans est statics
     companion object{
 
-        // https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/persons.json
-
+        // https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/android-articles.json
         val BASE_URL = "https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/"
 
         // L'utilitaire conversion JSON <=> Objet
