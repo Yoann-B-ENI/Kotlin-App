@@ -7,11 +7,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetrofitTools {
 
-    // Kotlin :  companion object = tout ce qui est dedans est statics
+    // Kotlin :  companion object = static
     companion object{
 
         // https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/android-articles.json
-        val BASE_URL = "https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/"
+        // 165.232.147.139:3000/articles
+        val BASE_URL = "http://165.232.147.139:3000/"
 
         // L'utilitaire conversion JSON <=> Objet
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build();

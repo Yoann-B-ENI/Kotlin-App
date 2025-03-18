@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.tp01.article.ArticlePage
 import com.example.tp01.R
 import com.example.tp01.article.ArticleActivity
 import com.example.tp01.ui.theme.MyMainButton

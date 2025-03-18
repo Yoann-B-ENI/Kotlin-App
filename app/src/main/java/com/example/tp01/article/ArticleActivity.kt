@@ -1,5 +1,6 @@
 package com.example.tp01.article
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,6 +26,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -39,18 +41,27 @@ import com.example.tp01.ui.theme.MyPageTemplate
 import com.example.tp01.ui.theme.MyTitle
 
 class ArticleActivity : ComponentActivity() {
+
+    // 'application' is null here, because it's before the constructor
+    // we can use 'lateinit' to declare the var but initialize it later
+    lateinit var viewModel: ArticleViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // so we initialize it here
+        viewModel = ArticleViewModel(application)
+
         setContent {
-            ArticlePage()
+            ArticlePage(viewModel)
         }
     }
 }
 
 
 @Composable
-fun ArticlePage(articleViewModel: ArticleViewModel = ArticleViewModel()
+fun ArticlePage(articleViewModel: ArticleViewModel
 ){
     val articleArray by articleViewModel.arrayArticles.collectAsState()
 
@@ -75,11 +86,11 @@ fun ArticlePage(articleViewModel: ArticleViewModel = ArticleViewModel()
             }) {
                 Text(stringResource(R.string.app_articlelist_button_removearticle))
             }
-            Button(onClick = {
-                articleViewModel.loadArticles()
-            }) {
-                Text(stringResource(R.string.app_articlelist_button_loadarticles))
-            }
+        }
+        Button(onClick = {
+            articleViewModel.loadArticles()
+        }) {
+            Text(stringResource(R.string.app_articlelist_button_loadarticles))
         }
         Spacer(modifier = Modifier.weight(0.5f))
         FunShowArticles(articleArray = articleArray)
@@ -147,6 +158,11 @@ fun ArticleCard(art: Article){
 @Preview(showBackground = true)
 @Composable
 fun ArticlePreview() {
-    ArticlePage()
+
+    // Récupérer le context d'application dans le Preview de l'IDE
+    val application = LocalContext.current.applicationContext as Application
+    val viewModel = ArticleViewModel(application)
+
+    ArticlePage(viewModel)
 }
 

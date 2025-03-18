@@ -33,4 +33,6 @@
     <string name="app_articlelist_button_removearticle">Remove Article</string>
     <string name="app_articlelist_button_loadarticles">Load Articles</string>
 
+    <string name="app_articleviewmodel_loadmessage">Loading articles, please wait...</string>
+
 </resources>

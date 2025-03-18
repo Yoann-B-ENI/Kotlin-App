@@ -2,7 +2,6 @@ package com.example.tp01.ui.theme
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -38,7 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tp01.R
+import com.example.tp01.helpers.ProgressDialog
 
 @Composable
 fun MyMainButton(text: String, context: Context? = null, intent: Intent? = null) {
@@ -209,6 +208,7 @@ fun MyPageTemplate(@DrawableRes bg_id: Int, content: @Composable() (ColumnScope.
                     modifier = Modifier.padding(30.dp)
                 ){
                     content()
+                    ProgressDialog()
                 }
             }
         }
