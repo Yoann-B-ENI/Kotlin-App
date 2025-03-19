@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
@@ -34,18 +35,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tp01.helpers.ProgressDialog
 
 @Composable
-fun MyMainButton(text: String, context: Context? = null, intent: Intent? = null) {
-    Button(onClick = {
-        if (context != null && intent != null){
-            context.startActivity(intent)
-        }
-    },
+fun MyMainButton(text: String, context: Context? = null, intent: Intent? = null,
+                 onClick: ()-> Unit = {
+                     if (context != null && intent != null){
+                         context.startActivity(intent)
+                     }
+                 }) {
+    Button(onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         border = BorderStroke(3.dp, Color(1f, 1f, 1f, 1f)),
         colors = ButtonColors(
@@ -90,7 +95,9 @@ fun MySmallButton(text: String, context: Context? = null, intent: Intent? = null
 
 @Composable
 fun MyTextField(label: String, placeholderText: String,
-                icon: ImageVector? = null) {
+                icon: ImageVector? = null,
+                value: String = " ", onValueChange: (String) -> Unit = {},
+                isPassword: Boolean = false) {
     Text(text = label,
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
@@ -105,7 +112,7 @@ fun MyTextField(label: String, placeholderText: String,
         )
     )
     //
-    TextField(value = "", onValueChange = {},
+    TextField(value = value, onValueChange = onValueChange,
         placeholder = {
             Row {
                 if (icon != null){
@@ -121,8 +128,12 @@ fun MyTextField(label: String, placeholderText: String,
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedContainerColor = Color(1f, 1f, 1f, 0.75f),
-            focusedContainerColor = Color(1f, 1f, 1f, 0.9f)
-        )
+            focusedContainerColor = Color(1f, 1f, 1f, 0.9f),
+            focusedTextColor = Color.Black,
+            unfocusedTextColor = Color.DarkGray
+        ),
+        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default
     )
     //
 }

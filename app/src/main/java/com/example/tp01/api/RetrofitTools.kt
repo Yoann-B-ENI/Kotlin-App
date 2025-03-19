@@ -12,7 +12,7 @@ class RetrofitTools {
 
         // https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/android-articles.json
         // 165.232.147.139:3000/articles
-        val BASE_URL = "http://165.232.147.139:3000/"
+        val BASE_URL = "http://192.168.50.2:3000/"
 
         // L'utilitaire conversion JSON <=> Objet
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build();
@@ -20,6 +20,7 @@ class RetrofitTools {
         // Retrofit
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(BASE_URL).build();
+            .baseUrl(BASE_URL)
+            .build();
     }
 }
