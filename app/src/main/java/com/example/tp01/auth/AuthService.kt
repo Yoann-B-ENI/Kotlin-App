@@ -10,7 +10,16 @@ interface AuthService {
 
     @POST("login")
     @Headers("Content-Type: application/json")
-    suspend fun login(@Body user: User) : ResponseAPI<String>
+    suspend fun login(@Body loginDTO: LoginDTO): ResponseAPI<String>
+
+    @POST("signup")
+    @Headers("Content-Type: application/json")
+    suspend fun signup(@Body signUpDTO: SignUpDTO): ResponseAPI<SignUpDTO>
+
+    @POST("reset-password")
+    @Headers("Content-Type: application/json")
+    suspend fun resetPassword(@Body recoverPwdDTO: RecoverPwdDTO): ResponseAPI<String>
+
 
     // implicit singleton
     // can be accessed with PersonAPI.personService

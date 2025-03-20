@@ -12,15 +12,10 @@ import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.tp01.R
 import com.example.tp01.article.ArticleActivity
 import com.example.tp01.ui.theme.MyMainButton
@@ -43,6 +38,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
+    val userDataState by authViewModel.loginDTOData.collectAsState()
+
     val context = LocalContext.current
 
     MyPageTemplate(
@@ -56,16 +53,16 @@ fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
         MyTextField(label = stringResource(R.string.app_login_field_label_email),
             placeholderText = stringResource(R.string.app_login_field_hint_email),
             icon = Icons.Outlined.Email,
-            value = authViewModel.email,
-            onValueChange = {authViewModel.updateEmail(it)},
-//            value = authViewModel.loggedUser.value.email,
-//            onValueChange = {authViewModel.updateEmail(it)}
+//            value = authViewModel.email,
+            value = userDataState.email,
+            onValueChange = {authViewModel.updateEmailLogin(it)}
         )
         MyTextField(label = stringResource(R.string.app_login_field_label_password),
             placeholderText = stringResource(R.string.app_login_field_hint_password),
             icon = Icons.Outlined.Lock,
-            value = authViewModel.password,
-            onValueChange = {authViewModel.updatePassword(it)},
+//            value = authViewModel.password,
+            value = userDataState.password,
+            onValueChange = {authViewModel.updatePasswordLogin(it)},
             isPassword = true
         )
         val intentRecoverPwd = Intent(context, RecoverPasswordActivity::class.java)
@@ -76,10 +73,9 @@ fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
         val intentRedirectArticles = Intent(context, ArticleActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_login_button_login),
             onClick = {
-                authViewModel.tryToLogin()
-                if (authViewModel.token != ""){
+                authViewModel.tryToLogin(onLoginSuccess = {
                     context.startActivity(intentRedirectArticles)
-                }
+                })
             })
         Spacer(modifier = Modifier.weight(1.5f))
 

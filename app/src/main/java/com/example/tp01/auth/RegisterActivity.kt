@@ -11,6 +11,8 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -36,8 +38,10 @@ class RegisterActivity : ComponentActivity() {
 
 
 @Composable
-fun RegisterPage(){
+fun RegisterPage(authViewModel: AuthViewModel = AuthViewModel()){
+    val signUpState by authViewModel.signUpDTO.collectAsState()
     val context = LocalContext.current
+
     MyPageTemplate(
         R.drawable.ivana_cajina_unsplash_hills
     ) {
@@ -48,35 +52,79 @@ fun RegisterPage(){
         Spacer(modifier = Modifier.weight(0.5f))
 
         MyTextField(label = stringResource(R.string.app_register_field_username_label),
-            placeholderText = stringResource(R.string.app_register_field_username_hint))
+            placeholderText = stringResource(R.string.app_register_field_username_hint),
+            value = signUpState.pseudo,
+            onValueChange = {authViewModel.updatePseudoSignup(it)}
+        )
         MyTextField(label = stringResource(R.string.app_login_field_label_email),
             placeholderText = stringResource(R.string.app_login_field_hint_email),
-            icon = Icons.Outlined.Email)
+            value = signUpState.email,
+            onValueChange = {authViewModel.updateEmailSignup(it)},
+            icon = Icons.Outlined.Email
+        )
         MyTextField(label = stringResource(R.string.app_login_field_label_password),
             placeholderText = stringResource(R.string.app_login_field_hint_password),
-            icon = Icons.Outlined.Lock)
-//        MyTextField(label = stringResource(R.string.app_login_field_label_password),
-//            placeholderText = stringResource(R.string.app_login_field_hint_password),
-//            icon = Icons.Outlined.Lock)
+            value = signUpState.password,
+            onValueChange = {authViewModel.updatePasswordSignup(it)},
+            icon = Icons.Outlined.Lock
+        )
+        MyTextField(label = stringResource(R.string.app_login_field_label_password),
+            placeholderText = stringResource(R.string.app_login_field_hint_password),
+            value = signUpState.passwordConfirm,
+            onValueChange = {authViewModel.updatePasswordConfirmSignup(it)},
+            icon = Icons.Outlined.Lock
+        )
+        MyMultiField(
+            labels = arrayOf(
+                stringResource(R.string.app_register_field_zipcode_label),
+                stringResource(R.string.app_register_field_cityname_label)
+            ),
+            placeholders = arrayOf(
+                stringResource(R.string.app_register_field_zipcode_hint),
+                stringResource(R.string.app_register_field_cityname_hint)
+            ),
+            weights = arrayOf(1f, 2f),
+            values = arrayOf(
+                signUpState.cityCode,
+                signUpState.city
+            ),
+            onValueChanges = arrayOf(
+                {authViewModel.updateCityCodeSignup(it)},
+                {authViewModel.updateCitySignup(it)}
+            )
+        )
 
-        MyMultiField(labels = arrayOf(stringResource(R.string.app_register_field_zipcode_label),
-            stringResource(R.string.app_register_field_cityname_label)),
-            placeholders = arrayOf(stringResource(R.string.app_register_field_zipcode_hint),
-                stringResource(R.string.app_register_field_cityname_hint)),
-            weights = arrayOf(1f, 2f)
+        MyTextField(label = stringResource(R.string.app_register_field_phonenumber_label),
+            placeholderText = stringResource(R.string.app_register_field_phonenumber_hint),
+            value = signUpState.phone,
+            onValueChange = {authViewModel.updatePhoneSignup(it)},
+            icon = Icons.Outlined.Phone
         )
-        MyMultiField(labels = arrayOf(stringResource(R.string.app_register_field_phonekey_label),
-            stringResource(R.string.app_register_field_phonenumber_label)),
-            placeholders = arrayOf(stringResource(R.string.app_register_field_phonekey_hint),
-                stringResource(R.string.app_register_field_phonenumber_hint)),
-            weights = arrayOf(1f, 3f),
-            icons = arrayOf(null, Icons.Outlined.Phone)
-        )
+//        MyMultiField(
+//            labels = arrayOf(
+//                stringResource(R.string.app_register_field_phonekey_label),
+//                stringResource(R.string.app_register_field_phonenumber_label)
+//            ),
+//            placeholders = arrayOf(
+//                stringResource(R.string.app_register_field_phonekey_hint),
+//                stringResource(R.string.app_register_field_phonenumber_hint)
+//            ),
+//            weights = arrayOf(1f, 3f),
+//            icons = arrayOf(null, Icons.Outlined.Phone),
+//            values = TODO(),
+//            onValueChanges = TODO()
+//        )
 
         Spacer(modifier = Modifier.weight(1f))
-        val intentArticle = Intent(context, ArticleActivity::class.java)
+        val intentLogin = Intent(context, MainActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_register_button_signup),
-            context = context, intent = intentArticle)
+            onClick = {
+                authViewModel.tryToSignUp(onSignupSuccess = {
+                    context.startActivity(intentLogin)
+                })
+            })
+//        MyMainButton(text = stringResource(R.string.app_register_button_signup),
+//            context = context, intent = intentArticle)
         Spacer(modifier = Modifier.weight(1f))
     }
 }

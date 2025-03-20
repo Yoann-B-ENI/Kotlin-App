@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -32,8 +33,10 @@ class RecoverPasswordActivity : ComponentActivity() {
 
 
 @Composable
-fun RecoverPasswordPage(){
+fun RecoverPasswordPage(authViewModel: AuthViewModel = AuthViewModel()){
+    val recoverPwdState = authViewModel.recoverPwdDTO.collectAsState()
     val context = LocalContext.current
+
     MyPageTemplate(
         R.drawable.blake_wisz_unsplash_river_sea_gorge
     ) {
@@ -44,11 +47,20 @@ fun RecoverPasswordPage(){
         Spacer(modifier = Modifier.weight(0.5f))
         MyTextField(label = stringResource(R.string.app_login_field_label_email),
             placeholderText = stringResource(R.string.app_login_field_hint_email),
-            icon = Icons.Outlined.Email)
+            icon = Icons.Outlined.Email,
+            value = recoverPwdState.value.email,
+            onValueChange = {authViewModel.updateEmailRecover(it)}
+        )
 
         val intent = Intent(context, MainActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail),
-            context = context, intent = intent)
+            onClick = {
+                authViewModel.tryToRecoverPwd(onRecoverSuccess = {
+                    context.startActivity(intent)
+                })
+            })
+//        MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail),
+//            context = context, intent = intent)
         Spacer(modifier = Modifier.weight(4f))
     }
 }

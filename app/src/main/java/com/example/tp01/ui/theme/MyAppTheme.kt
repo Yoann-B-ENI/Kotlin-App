@@ -170,7 +170,8 @@ fun MyTitle(text: String) {
 
 @Composable
 fun MyMultiField(labels: Array<String>, placeholders: Array<String>,
-                 weights: Array<Float>, icons: Array<ImageVector?>? = null){
+                 weights: Array<Float>, icons: Array<ImageVector?>? = null,
+                 values: Array<String>, onValueChanges: Array<(String) -> Unit>){
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -179,15 +180,16 @@ fun MyMultiField(labels: Array<String>, placeholders: Array<String>,
                 modifier = Modifier.weight(weights[i])
             ){
                 Column {
-                    if (icons != null) {MyTextField(
-                            label = labels[i],
-                            placeholderText = placeholders[i],
-                            icon = icons[i]
-                        )}
-                    else{MyTextField(
-                            label = labels[i],
-                            placeholderText = placeholders[i]
-                        )}
+                    var iconParam: ImageVector? = null
+                    if (icons != null) {iconParam = icons[i]}
+                    else{iconParam = null}
+                    MyTextField(
+                        label = labels[i],
+                        placeholderText = placeholders[i],
+                        icon = iconParam,
+                        value = values[i],
+                        onValueChange = onValueChanges[i]
+                    )
                 }
             }
         } // end for elements
