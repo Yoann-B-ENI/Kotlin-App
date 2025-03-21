@@ -1,10 +1,6 @@
 package com.example.tp01.article
 
 import android.app.Application
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,33 +31,36 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.example.tp01.R
 import com.example.tp01.ui.theme.MyPageTemplate
 import com.example.tp01.ui.theme.MyTitle
 
-class ArticleActivity : ComponentActivity() {
-
-    // 'application' is null here, because it's before the constructor
-    // we can use 'lateinit' to declare the var but initialize it later
-    lateinit var viewModel: ArticleViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        // so we initialize it here
-        viewModel = ArticleViewModel(application)
-
-        setContent {
-            ArticlePage(viewModel)
-        }
-    }
-}
+//class ArticleActivity : ComponentActivity() {
+//
+//    // 'application' is null here, because it's before the constructor
+//    // we can use 'lateinit' to declare the var but initialize it later
+//    lateinit var viewModel: ArticleViewModel
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        enableEdgeToEdge()
+//
+//        // so we initialize it here
+//        viewModel = ArticleViewModel(application)
+//
+//        setContent {
+//            ArticlePage(viewModel)
+//        }
+//    }
+//}
 
 
 @Composable
-fun ArticlePage(articleViewModel: ArticleViewModel
+fun ArticlePage(articleViewModel: ArticleViewModel,
+                navController: NavController = rememberNavController()
 ){
     val articleArray by articleViewModel.arrayArticles.collectAsState()
 

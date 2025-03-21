@@ -55,6 +55,7 @@ dependencies {
     // ViewModel, ViewModel utilities for Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    implementation(libs.androidx.navigation.compose)
     // ---- TEST IMPLEMENTATION
     testImplementation(libs.junit)
     // ---- ANDROID TEST IMPLEMENTATION

@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".demo_nav.DemoNavActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".auth.RegisterActivity"
             >
         </activity>

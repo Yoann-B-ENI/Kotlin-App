@@ -13,6 +13,7 @@ class RetrofitTools {
         // https://raw.githubusercontent.com/Chocolaterie/EniWebService/refs/heads/main/api/android-articles.json
         // 165.232.147.139:3000/articles
         // http://10.0.2.2:3000/ for emulator
+        // http://localhost:3000 for mobile if port forwarded
         val BASE_URL = "http://10.0.2.2:3000/"
 
         // L'utilitaire conversion JSON <=> Objet

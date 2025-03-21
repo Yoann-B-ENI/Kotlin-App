@@ -1,10 +1,5 @@
 package com.example.tp01.auth
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
@@ -14,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.tp01.R
-import com.example.tp01.article.ArticleActivity
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyMultiField
 import com.example.tp01.ui.theme.MyPageTemplate
@@ -26,21 +21,23 @@ import com.example.tp01.ui.theme.MyTextField
 import com.example.tp01.ui.theme.MyTitle
 import com.example.tp01.ui.theme.MyWarning
 
-class RegisterActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            RegisterPage()
-        }
-    }
-}
+//class RegisterActivity : ComponentActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        enableEdgeToEdge()
+//        setContent {
+//            RegisterPage()
+//        }
+//    }
+//}
 
 
 @Composable
-fun RegisterPage(authViewModel: AuthViewModel = AuthViewModel()){
+fun RegisterPage(authViewModel: AuthViewModel = AuthViewModel(),
+                 navController: NavController = rememberNavController()
+){
     val signUpState by authViewModel.signUpDTO.collectAsState()
-    val context = LocalContext.current
+//    val context = LocalContext.current
 
     MyPageTemplate(
         R.drawable.ivana_cajina_unsplash_hills
@@ -116,11 +113,11 @@ fun RegisterPage(authViewModel: AuthViewModel = AuthViewModel()){
 //        )
 
         Spacer(modifier = Modifier.weight(1f))
-        val intentLogin = Intent(context, MainActivity::class.java)
+//        val intentLogin = Intent(context, MainActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_register_button_signup),
             onClick = {
                 authViewModel.tryToSignUp(onSignupSuccess = {
-                    context.startActivity(intentLogin)
+                    navController.navigate("loginPage")
                 })
             })
 //        MyMainButton(text = stringResource(R.string.app_register_button_signup),

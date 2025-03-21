@@ -69,14 +69,15 @@ fun MyMainButton(text: String, context: Context? = null, intent: Intent? = null,
 }
 
 @Composable
-fun MySmallButton(text: String, context: Context? = null, intent: Intent? = null){
+fun MySmallButton(text: String, context: Context? = null, intent: Intent? = null,
+                  onClick: ()-> Unit = {
+                      if (context != null && intent != null){
+                          context.startActivity(intent)
+                      }
+                  }){
     // needs a box for a box scope alignment
     Box(modifier = Modifier.fillMaxWidth()){
-        Button(onClick = {
-            if (context != null && intent != null){
-                context.startActivity(intent)
-            }
-        },
+        Button(onClick = onClick,
             modifier = Modifier.fillMaxWidth(fraction = 0.75f)
                 .align(Alignment.Center),
             border = BorderStroke(3.dp, Color(1f, 1f, 1f, 0.5f)),

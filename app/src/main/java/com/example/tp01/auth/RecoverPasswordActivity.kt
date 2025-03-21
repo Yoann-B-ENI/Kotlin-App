@@ -1,19 +1,15 @@
 package com.example.tp01.auth
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.tp01.R
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyPageTemplate
@@ -21,21 +17,23 @@ import com.example.tp01.ui.theme.MyTextField
 import com.example.tp01.ui.theme.MyTitle
 import com.example.tp01.ui.theme.MyWarning
 
-class RecoverPasswordActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            RecoverPasswordPage()
-        }
-    }
-}
+//class RecoverPasswordActivity : ComponentActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        enableEdgeToEdge()
+//        setContent {
+//            RecoverPasswordPage()
+//        }
+//    }
+//}
 
 
 @Composable
-fun RecoverPasswordPage(authViewModel: AuthViewModel = AuthViewModel()){
+fun RecoverPasswordPage(authViewModel: AuthViewModel = AuthViewModel(),
+                        navController: NavController = rememberNavController()
+){
     val recoverPwdState = authViewModel.recoverPwdDTO.collectAsState()
-    val context = LocalContext.current
+//    val context = LocalContext.current
 
     MyPageTemplate(
         R.drawable.blake_wisz_unsplash_river_sea_gorge
@@ -52,11 +50,11 @@ fun RecoverPasswordPage(authViewModel: AuthViewModel = AuthViewModel()){
             onValueChange = {authViewModel.updateEmailRecover(it)}
         )
 
-        val intent = Intent(context, MainActivity::class.java)
+//        val intent = Intent(context, MainActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail),
             onClick = {
                 authViewModel.tryToRecoverPwd(onRecoverSuccess = {
-                    context.startActivity(intent)
+                    navController.navigate("loginPage")
                 })
             })
 //        MyMainButton(text = stringResource(R.string.app_recoverpassword_button_sendmail),

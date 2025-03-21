@@ -1,6 +1,6 @@
 package com.example.tp01.auth
 
-import android.content.Intent
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,8 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.tp01.R
-import com.example.tp01.article.ArticleActivity
+import com.example.tp01.article.ArticlePage
+import com.example.tp01.article.ArticleViewModel
 import com.example.tp01.ui.theme.MyMainButton
 import com.example.tp01.ui.theme.MyPageTemplate
 import com.example.tp01.ui.theme.MySmallButton
@@ -30,14 +35,38 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LoginPage()
+            LoginNavHost(application = application)
         }
     }
 }
 
+@Composable
+fun LoginNavHost(application: Application){
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "loginPage"
+    ){
+        composable("loginPage") {
+            LoginPage(navController = navController)
+        }
+        composable("signupPage") {
+            RegisterPage(navController = navController)
+        }
+        composable("recoverPwdPage") {
+            RecoverPasswordPage(navController = navController)
+        }
+        composable("articlesPage") {
+            ArticlePage(articleViewModel = ArticleViewModel(application = application),
+                navController = navController)
+        }
+    }
+}
 
 @Composable
-fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
+fun LoginPage(authViewModel: AuthViewModel = AuthViewModel(),
+              navController: NavController
+){
     val userDataState by authViewModel.loginDTOData.collectAsState()
 
     val context = LocalContext.current
@@ -65,23 +94,27 @@ fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
             onValueChange = {authViewModel.updatePasswordLogin(it)},
             isPassword = true
         )
-        val intentRecoverPwd = Intent(context, RecoverPasswordActivity::class.java)
-        MySmallButton(text = stringResource(R.string.app_login_button_forgotten_password), 
-            context = context, intent = intentRecoverPwd)
+//        val intentRecoverPwd = Intent(context, RecoverPasswordActivity::class.java)
+        MySmallButton(text = stringResource(R.string.app_login_button_forgotten_password),
+            onClick = {
+                navController.navigate("recoverPwdPage")
+            })
         Spacer(modifier = Modifier.weight(0.5f))
 
-        val intentRedirectArticles = Intent(context, ArticleActivity::class.java)
+//        val intentRedirectArticles = Intent(context, ArticleActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_login_button_login),
             onClick = {
                 authViewModel.tryToLogin(onLoginSuccess = {
-                    context.startActivity(intentRedirectArticles)
+                    navController.navigate("articlesPage")
                 })
             })
         Spacer(modifier = Modifier.weight(1.5f))
 
-        val intentSignup = Intent(context, RegisterActivity::class.java)
+//        val intentSignup = Intent(context, RegisterActivity::class.java)
         MyMainButton(text = stringResource(R.string.app_login_button_signup),
-            context = context, intent  = intentSignup)
+            onClick = {
+                navController.navigate("signupPage")
+            })
         Spacer(modifier = Modifier.weight(1f))
     }
 }
@@ -90,7 +123,8 @@ fun LoginPage(authViewModel: AuthViewModel = AuthViewModel()){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    LoginPage()
+    val application = LocalContext.current.applicationContext as Application
+    LoginNavHost(application)
 }
 
 
