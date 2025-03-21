@@ -69,7 +69,7 @@ fun LoginPage(authViewModel: AuthViewModel = AuthViewModel(),
 ){
     val userDataState by authViewModel.loginDTOData.collectAsState()
 
-    val context = LocalContext.current
+//    val context = LocalContext.current
 
     MyPageTemplate(
         R.drawable.kimon_maritz_unsplash_river_valley
